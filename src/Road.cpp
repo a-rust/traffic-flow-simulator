@@ -1,7 +1,8 @@
 #include "Road.h"
 
-Road::Road(sf::RenderWindow& window, const sf::Vector2f& size)
+Road::Road(sf::RenderWindow& window, const sf::Vector2f& size, int lanes)
 {
+    this->lanes = lanes;
     setSize(size);
     // Roads will be grey
     setFillColor(sf::Color(128,128,128,255));

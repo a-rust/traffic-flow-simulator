@@ -5,6 +5,6 @@ class Road : public sf::RectangleShape
 public:
     // Parameters to choose the number of lanes in the simulation
     int lanes;
-    Road(sf::RenderWindow& window, const sf::Vector2f& size);
+    Road(sf::RenderWindow& window, const sf::Vector2f& size, int lanes);
     void draw(sf::RenderWindow& window, int lanes);
 };
