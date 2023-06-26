@@ -1,7 +1,8 @@
 #include "Car.h"
 
-Car::Car(sf::RenderWindow& window, const Road& road, sf::Color color, int lane, int lane_position)
+Car::Car(sf::RenderWindow& window, const Road& road, sf::Color color, int lane, int lane_position, int speed)
 {
+    this->speed = speed;
     this->lane = lane;
     this->lane_position = lane_position;
     setSize(sf::Vector2f((road.getSize().y / road.lanes)/2, (road.getSize().y / road.lanes)/2));
