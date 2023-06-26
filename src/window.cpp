@@ -14,6 +14,19 @@ void draw_cars(sf::RenderWindow& window, std::vector<Car>& cars) {
 }
 
 
+void update_cars(sf::RenderWindow& window, std::vector<Car>& cars, Road road)
+{
+       for (Car& car: cars)
+        {
+            car.move(sf::Vector2f(0.1, 0.f));
+            // If car reaches end of road, respawn back at the left-most x-position of the same lane
+            if (car.getPosition().x >= window.getSize().x){
+                car.setPosition(0, car.getPosition().y);
+            }
+        }
+}
+
+
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(1500, 1500), "Traffic Flow Simulator");
@@ -43,7 +56,10 @@ int main()
 
     draw_cars(window, cars);
 
+    update_cars(window, cars, highway);
+
     window.display();
     }
+
     return 0;
 }
