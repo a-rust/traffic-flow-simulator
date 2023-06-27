@@ -1,6 +1,8 @@
 #include "Simulation.h"
+#include <vector>
 
-Simulation::Simulation(int speed_limit_high, int speed_limit_low, int num_cars_to_decrease_speed, int decrease_speed, int num_cars_to_increase_speed, int increase_speed){
+Simulation::Simulation(std::vector<int> carpool_lanes, int speed_limit_high, int speed_limit_low, int num_cars_to_decrease_speed, int decrease_speed, int num_cars_to_increase_speed, int increase_speed){
+    this->carpool_lanes = carpool_lanes;
     this->speed_limit_high = speed_limit_high;
     this->speed_limit_low = speed_limit_low;
     this->num_cars_to_decrease_speed = num_cars_to_decrease_speed;
@@ -53,15 +55,39 @@ void Simulation::highway(sf::RenderWindow& window, std::vector<Car>& cars, Road 
     car1.speed = car1.speed + this->increase_speed;
     }
 
-    // Enforce a speed limit
-    if (car1.speed < speed_limit_low) {
-      car1.speed = speed_limit_low;
-    } else if (car1.speed > speed_limit_high) {
-      car1.speed = speed_limit_high;
+    // Carpool lanes
+    bool car_in_carpool_lane = false;
+    for (int& lane: carpool_lanes){
+        if (car1.lane == lane){
+            car_in_carpool_lane = true;
+            break;
+        }
     }
+
+    if (car_in_carpool_lane){
+        // Enforce a speed limit for cars in carpool lanes
+        if (car1.speed < speed_limit_low) {
+            car1.speed = speed_limit_low;
+        } else if (car1.speed > ceil(1.25*speed_limit_high)) {
+            car1.speed = ceil(1.25*speed_limit_high);
+        }
+    } else {
+        // Enforce a speed limit for cars not in carpool lanes
+        if (car1.speed < speed_limit_low) {
+            car1.speed = speed_limit_low;
+        } else if (car1.speed > speed_limit_high) {
+            car1.speed = speed_limit_high;
+        }
+    }
+    
+
+
+
 
     // Move car1 by the state of its speed
     car1.move(car1.speed, 0);
+
+
 
     // For illustrative purposes, if car1 reaches the end of the road, it will loop back
     if (car1.getPosition().x >= road.getSize().x){
