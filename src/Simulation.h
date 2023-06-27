@@ -4,6 +4,14 @@
 class Simulation
 {
     public:
-    Simulation();
+    // Safety parameter to slow down speed of car if any other car in front is within some threshold
+    int num_cars_to_decrease_speed;
+    int decrease_speed;
+    // Parameter to speed up car if it has no cars within some threshold in front of it
+    int num_cars_to_increase_speed;
+    int increase_speed;
+
+    Simulation(int num_cars_to_decrease_speed, int decrease_speed, int num_cars_to_increase_speed, int increase_speed);
+
     void next_state(sf::RenderWindow& window, std::vector<Car>& cars, Road road);
 };

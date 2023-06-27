@@ -8,6 +8,12 @@ const int NUM_LANES = 10;
 const int NUM_CARS = 200;
 const int ROAD_WIDTH = 400;
 
+// Simulation parameters; defined in "Simulations.cpp"
+const int distance_to_decrease_speed = 2;
+const int decrease_speed = -1;
+const int distance_to_increase_speed = 2;
+const int increase_speed = 1;
+
 
 void draw_cars(sf::RenderWindow& window, std::vector<Car>& cars) {
   for (Car& car: cars) {
@@ -47,7 +53,7 @@ int main()
 
     draw_cars(window, cars);
 
-    Simulation sim = Simulation();
+    Simulation sim = Simulation(distance_to_decrease_speed, decrease_speed, distance_to_increase_speed, increase_speed);
 
     sim.next_state(window, cars, highway);
 
