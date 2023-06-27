@@ -4,6 +4,9 @@
 class Simulation
 {
     public:
+    // Speed limits; will be enforced on every car
+    int speed_limit_high;
+    int speed_limit_low;
     // Safety parameter to slow down speed of car if any other car in front is within some threshold
     int num_cars_to_decrease_speed;
     int decrease_speed;
@@ -11,7 +14,7 @@ class Simulation
     int num_cars_to_increase_speed;
     int increase_speed;
 
-    Simulation(int num_cars_to_decrease_speed, int decrease_speed, int num_cars_to_increase_speed, int increase_speed);
+    Simulation(int speed_limit_high, int speed_limit_low, int num_cars_to_decrease_speed, int decrease_speed, int num_cars_to_increase_speed, int increase_speed);
 
     void next_state(sf::RenderWindow& window, std::vector<Car>& cars, Road road);
 };

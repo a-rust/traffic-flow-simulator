@@ -1,6 +1,8 @@
 #include "Simulation.h"
 
-Simulation::Simulation(int num_cars_to_decrease_speed, int decrease_speed, int num_cars_to_increase_speed, int increase_speed){
+Simulation::Simulation(int speed_limit_high, int speed_limit_low, int num_cars_to_decrease_speed, int decrease_speed, int num_cars_to_increase_speed, int increase_speed){
+    this->speed_limit_high = speed_limit_high;
+    this->speed_limit_low = speed_limit_low;
     this->num_cars_to_decrease_speed = num_cars_to_decrease_speed;
     this->decrease_speed = decrease_speed;
     this->num_cars_to_increase_speed = num_cars_to_increase_speed;
@@ -49,6 +51,13 @@ void Simulation::next_state(sf::RenderWindow& window, std::vector<Car>& cars, Ro
         // Example, if the x position of car1 is 500, the x position of the closest car in front is 675, the length of car1 is 50, and num_cars_to_decrease_speed = 3, then the speed of car1 will increase by increase_speed
     else if (nearest_car_distance > this->num_cars_to_increase_speed*car1.getSize().x) {
     car1.speed = car1.speed + this->increase_speed;
+    }
+
+    // Enforce a speed limit
+    if (car1.speed < speed_limit_low) {
+      car1.speed = speed_limit_low;
+    } else if (car1.speed > speed_limit_high) {
+      car1.speed = speed_limit_high;
     }
 
     // Move car1 by the state of its speed
