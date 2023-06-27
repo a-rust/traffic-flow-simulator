@@ -16,5 +16,5 @@ class Simulation
 
     Simulation(int speed_limit_high, int speed_limit_low, int num_cars_to_decrease_speed, int decrease_speed, int num_cars_to_increase_speed, int increase_speed);
 
-    void next_state(sf::RenderWindow& window, std::vector<Car>& cars, Road road);
+    void highway(sf::RenderWindow& window, std::vector<Car>& cars, Road road);
 };

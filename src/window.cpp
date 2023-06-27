@@ -57,7 +57,7 @@ int main()
 
     Simulation sim = Simulation(SPEED_LIMIT_HIGH, SPEED_LIMIT_LOW, DISTANCE_TO_DECREASE_SPEED, DECREASE_SPEED, DISTANCE_TO_INCREASE_SPEED, INCREASE_SPEED);
 
-    sim.next_state(window, cars, highway);
+    sim.highway(window, cars, highway);
 
     window.display();
     }

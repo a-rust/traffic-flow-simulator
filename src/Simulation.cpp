@@ -9,7 +9,7 @@ Simulation::Simulation(int speed_limit_high, int speed_limit_low, int num_cars_t
     this->increase_speed = increase_speed;
 }
 
-void Simulation::next_state(sf::RenderWindow& window, std::vector<Car>& cars, Road road){
+void Simulation::highway(sf::RenderWindow& window, std::vector<Car>& cars, Road road){
   // Checking the neighbors of each car
   for (int i = 0; i < cars.size(); i++) {
     Car& car1 = cars[i];
