@@ -8,8 +8,8 @@ class Simulation
     // Cars in carpool lanes will have a higher speed limit than cars in normal lanes
     std::vector<int> carpool_lanes;
     // Speed limits; will be enforced on every car
-    int speed_limit_high;
-    int speed_limit_low;
+    int max_speed_limit;
+    int min_speed_limit;
     // Safety parameter to slow down speed of car if any other car in front is within some threshold
     int spaces_to_decrease;
     int decrease_speed;
@@ -17,7 +17,7 @@ class Simulation
     int spaces_to_increase;
     int increase_speed;
 
-    Simulation(std::vector<int> carpool_lanes, int speed_limit_high, int speed_limit_low, int spaces_to_decrease, int decrease_speed, int spaces_to_increase, int increase_speed);
+    Simulation(std::vector<int> carpool_lanes, int max_speed_limit, int min_speed_limit, int spaces_to_decrease, int decrease_speed, int spaces_to_increase, int increase_speed);
 
     void highway(sf::RenderWindow& window, std::vector<Car>& cars, Road road);
 };
