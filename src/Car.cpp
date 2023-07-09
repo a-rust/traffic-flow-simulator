@@ -1,6 +1,6 @@
 #include "Car.h"
 
-Car::Car(sf::RenderWindow& window, const Road& road, sf::Color color, int lane, int lane_position, int speed)
+Car::Car(sf::RenderWindow& window, const Road& road, sf::Color color, int lane, int lane_position, float speed)
 {
     this->speed = speed;
     this->lane = lane;

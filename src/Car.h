@@ -4,10 +4,10 @@
 class Car : public sf::RectangleShape 
 {
   public:
-    int speed;
+    float speed;
     int lane;
     int lane_position;
     sf::Color color;
-    Car(sf::RenderWindow& window, const Road& road, sf::Color color, int lane, int lane_position, int speed);
+    Car(sf::RenderWindow& window, const Road& road, sf::Color color, int lane, int lane_position, float speed);
     void draw(sf::RenderWindow& window);
 };
