@@ -2,6 +2,7 @@
 // #include "Car.h"
 #include "Simulation.h"
 #include <time.h>
+#include <random>
 #include "iostream"
 
 // Road parameters
@@ -11,11 +12,11 @@ const int ROAD_WIDTH = 400;
 
 
 // Simulation parameters; defined in "Simulations.cpp"
-const int SPEED_LIMIT_HIGH = 5;
-const int SPEED_LIMIT_LOW = 1;
+const float MAX_SPEED_LIMIT = 3;
+const float MIN_SPEED_LIMIT = 0.25;
 const int DISTANCE_TO_DECREASE_SPEED = 2;
 const int DECREASE_SPEED = -1;
-const int DISTANCE_TO_INCREASE_SPEED = 2;
+const int DISTANCE_TO_INCREASE_SPEED = 5;
 const int INCREASE_SPEED = 1;
 
 
@@ -34,15 +35,17 @@ int main()
     carpool_lanes.push_back(2);
 
     sf::RenderWindow window(sf::VideoMode(1500, 1500), "Traffic Flow Simulator");
-    window.setFramerateLimit(25);
+    window.setFramerateLimit(60);
     Road highway(window, sf::Vector2f(window.getSize().x, ROAD_WIDTH), NUM_LANES);
     std::vector<Car> cars;
     srand(time(NULL));
+    std::default_random_engine engine;
     // Initial configuration of the simulation
     for (int i = 0; i < NUM_CARS; i++) {
         int lane = 1 + rand() % highway.lanes;
         int lane_position = 1 + rand() % (window.getSize().x / 25);
-        int speed = 1 + rand() % 4;
+        std::uniform_real_distribution<float> dist(MIN_SPEED_LIMIT, MAX_SPEED_LIMIT);
+        float speed = dist(engine);
         Car c(window, highway, sf::Color::Green, lane, lane_position, speed);
         cars.push_back(c);
     }
@@ -63,7 +66,7 @@ int main()
     draw_cars(window, cars);
     
 
-    Simulation sim = Simulation(carpool_lanes, SPEED_LIMIT_HIGH, SPEED_LIMIT_LOW, DISTANCE_TO_DECREASE_SPEED, DECREASE_SPEED, DISTANCE_TO_INCREASE_SPEED, INCREASE_SPEED);
+    Simulation sim = Simulation(carpool_lanes, MAX_SPEED_LIMIT, MIN_SPEED_LIMIT, DISTANCE_TO_DECREASE_SPEED, DECREASE_SPEED, DISTANCE_TO_INCREASE_SPEED, INCREASE_SPEED);
 
     sim.highway(window, cars, highway);
 
