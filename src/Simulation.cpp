@@ -1,13 +1,13 @@
 #include "Simulation.h"
 #include <vector>
 
-Simulation::Simulation(std::vector<int> carpool_lanes, int speed_limit_high, int speed_limit_low, int num_cars_to_decrease_speed, int decrease_speed, int num_cars_to_increase_speed, int increase_speed){
+Simulation::Simulation(std::vector<int> carpool_lanes, int speed_limit_high, int speed_limit_low, int spaces_to_decrease, int decrease_speed, int spaces_to_increase, int increase_speed){
     this->carpool_lanes = carpool_lanes;
     this->speed_limit_high = speed_limit_high;
     this->speed_limit_low = speed_limit_low;
-    this->num_cars_to_decrease_speed = num_cars_to_decrease_speed;
+    this->spaces_to_decrease = spaces_to_decrease;
     this->decrease_speed = decrease_speed;
-    this->num_cars_to_increase_speed = num_cars_to_increase_speed;
+    this->spaces_to_increase = spaces_to_increase;
     this->increase_speed = increase_speed;
 }
 
@@ -44,14 +44,14 @@ void Simulation::highway(sf::RenderWindow& window, std::vector<Car>& cars, Road 
 
         // Cellular automaton rules:
 
-        // If there are any cars within num_cars_to_decrease_speed car-lengths in front of car1, then decrease the speed of car1
-            // Example, if the x position of car1 is 500, the x position of the closest car in front is 600, the length of car1 is 50, and num_cars_to_decrease_speed = 2, then the speed of car1 will decrease by decrease_speed
-        if (nearest_car_distance <= this->num_cars_to_decrease_speed*car1.getSize().x) {
+        // If there are any cars within N spaces in front of car1 (where each space is the length of car1), then decrease the speed of car1
+            // Example, if the x position of car1 is 500, the x position of the closest car in front is 600, the length of car1 is 50, and spaces_to_decrease = 2, then the speed of car1 will decrease by decrease_speed
+        if (nearest_car_distance <= this->spaces_to_decrease*car1.getSize().x) {
             car1.speed = car1.speed + this->decrease_speed;
         } 
-        // If there are no cars within num_cars_to_increase_speed car-lengths in front of car1, then increase the speed of car1
+        // If there are no cars within N spaces in front of car1 (where each space is the length of car1), then increase the speed of car1
             // Example, if the x position of car1 is 500, the x position of the closest car in front is 675, the length of car1 is 50, and num_cars_to_decrease_speed = 3, then the speed of car1 will increase by increase_speed
-        else if (nearest_car_distance > this->num_cars_to_increase_speed*car1.getSize().x) {
+        else if (nearest_car_distance > this->spaces_to_increase*car1.getSize().x) {
             car1.speed = car1.speed + this->increase_speed;
         }
 
