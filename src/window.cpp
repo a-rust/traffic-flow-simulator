@@ -3,7 +3,6 @@
 #include "Simulation.h"
 #include <time.h>
 #include <random>
-#include "iostream"
 
 // Road parameters
 const int NUM_LANES = 10;
@@ -15,9 +14,9 @@ const int ROAD_WIDTH = 400;
 const float MAX_SPEED_LIMIT = 3;
 const float MIN_SPEED_LIMIT = 0.25;
 const int DISTANCE_TO_DECREASE_SPEED = 2;
-const int DECREASE_SPEED = -1;
-const int DISTANCE_TO_INCREASE_SPEED = 5;
-const int INCREASE_SPEED = 1;
+const float DECREASE_SPEED = -0.25;
+const int DISTANCE_TO_INCREASE_SPEED = 2;
+const float INCREASE_SPEED = 0.25;
 
 
 void draw_cars(sf::RenderWindow& window, std::vector<Car>& cars) {
