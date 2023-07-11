@@ -21,8 +21,10 @@ The simulation will run on a 2-dimensional grid with a road consisting of a numb
 * All cars will be driving eastbound at a given speed
 * For simplicity, all cars will be of the same size
 * Each lane will have a minimum speed limit and a maximum speed limit
-  * All cars driving on lane $l$ must be traveling within L's minimum speed limit and maximum speed limit
-  * The maximum speed limit of all non-carpool lanes will be the same, the maximum speed limit of all carpool lanes will be $1.25$ times the maximum speed of non-carpool lanes, and the minimum speed limit of all lanes will be the same
+  * All cars driving on lane $l$ must be traveling within $l$'s minimum speed limit and maximum speed limit
+  * The maximum speed limit of all non-carpool lanes will be some value set by the user
+  * The maximum speed limit of all carpool lanes will be $1.25$ times the maximum speed limit of non-carpool lanes
+  * The minimum speed limit of all lanes will be some value set by the user
 
 ## Definitions
 1. Consider an arbitrary car $c$ of length $x$ driving eastbound on lane $l$ with a speed of $s$. Now suppose that $c$ covers the road on $l$ from $[r, r+x]$ for some $r\in \mathbb{R}$. We define a "space" in front of $c$ to be the road on $l$ spanning over $[r+x, r+2x]$
@@ -34,5 +36,5 @@ The simulation will run on a 2-dimensional grid with a road consisting of a numb
 
 ## Cellular Automaton Rules
 For an arbitrary car $c$ of length $x$ traveling eastbound on lane $l$,
-1. If for every $c' \in C_c$, $c'$ is at least $N$ spaces in front of $c$, then update the speed of $c$ to be the speed of the closest car in front $c$ plus some $\epsilon \in [l_\text{min}, l_\text{max}]$
-2. If there exists some $c' \in C_c$ such that $c'$ is within N spaces of $c$, then update the speed of $c$ to be the speed of the closest car in front $c$ minus some $\epsilon \in [l_\text{min}, l_\text{max}]$
+1. If for every $c' \in C_c$, $c'$ is at least $N$ spaces in front of $c$, then update the speed of $c$ to be the speed of the closest car in front $c$ plus some $\epsilon \in [l_\text{min}, l_\text{max}]$, where $\epsilon$ is set by the user
+2. If there exists some $c' \in C_c$ such that $c'$ is within N spaces of $c$, then update the speed of $c$ to be the speed of the closest car in front $c$ minus some $\epsilon \in [l_\text{min}, l_\text{max}]$, where $\epsilon$ is set by the user
