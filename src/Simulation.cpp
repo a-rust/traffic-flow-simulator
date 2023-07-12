@@ -13,7 +13,7 @@ Simulation::Simulation(std::vector<int> carpool_lanes, int max_speed_limit, int 
     this->increase_speed = increase_speed;
 }
 
-void Simulation::highway(sf::RenderWindow& window, std::vector<Car>& cars, Road road){
+void Simulation::highway(sf::RenderWindow& window, std::vector<Car>& cars, Road highway){
     // Checking the neighbors of each car
     std::default_random_engine engine;
     for (int i = 0; i < cars.size(); i++) {
@@ -91,8 +91,8 @@ void Simulation::highway(sf::RenderWindow& window, std::vector<Car>& cars, Road 
         car1.move(car1.speed, 0);
 
         // For illustrative purposes, if car1 reaches the end of the road, it will loop back
-        if (car1.getPosition().x >= road.getSize().x){
-            car1.setPosition(0, car1.getPosition().y);
+        if (car1.getPosition().x >= highway.getSize().x){
+            car1.setPosition(-200, car1.getPosition().y);
         }
     }
 }
