@@ -2,7 +2,10 @@
 - [Table of Contents](#table-of-contents)
 - [Project Description](#project-description)
   - [Simulation Features](#simulation-features)
-- [Simulation](#simulation)
+- [Installation](#installation)
+  - [Prerequisites](#prerequisites)
+  - [Running the simulation](#running-the-simulation)
+- [Simulation Details](#simulation-details)
   - [Preliminaries](#preliminaries)
   - [Definitions](#definitions)
   - [Cellular Automaton Rules](#cellular-automaton-rules)
@@ -15,7 +18,17 @@ A 2-dimensional cellular automaton that simulates the flow of traffic on multi-l
 - [x] Carpool lanes
 - [x] Safety parameters to avoid collisions
 
-# Simulation
+# Installation
+## Prerequisites
+* SFML
+## Running the simulation
+```
+git clone https://github.com/a-rust/traffic-flow-simulator.git
+cd traffic-flow-simulator
+chmod +x ./install.sh
+./install.sh
+```
+# Simulation Details
 ## Preliminaries
 The simulation will run on a 2-dimensional grid with a road consisting of a number of lanes (set by the user)
 * All cars will be driving eastbound at a given speed
